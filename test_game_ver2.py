@@ -6,6 +6,7 @@ def initialize_game():
     st.session_state.secret_number = random.randint(1, 100)
     st.session_state.attempts = 0
     st.session_state.game_over = False
+    st.session_state.pop("last_hint", None)
     st.session_state.guesses = []
 
 def check_guess():
