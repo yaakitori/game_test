@@ -20,10 +20,20 @@ def check_guess():
     elif st.session_state.attempts >= 5:
         st.session_state.game_over = True
     else:
+        diff = abs(guess - st.session_state.secret_number)
         if guess < st.session_state.secret_number:
-            st.session_state.last_hint = "⬆️ もっと大きい数字です！"
+            base_hint = "⬆️ もっと大きい数字です！"
         else:
-            st.session_state.last_hint = "⬇️ もっと小さい数字です！"
+            base_hint = "⬇️ もっと小さい数字です！"
+
+        if diff <= 10:
+            heat_hint = "🔥 近いです！"
+        elif diff <= 20:
+            heat_hint = "🙂 そこそこ近いです。"
+        else:
+            heat_hint = "❄️ かなり遠いです。"
+
+        st.session_state.last_hint = f"{base_hint} {heat_hint}"
 
 def main():
     st.title("🎮 数字当てゲーム")
